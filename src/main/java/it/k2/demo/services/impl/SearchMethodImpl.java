@@ -46,7 +46,7 @@ public class SearchMethodImpl implements SearchMethod {
 
         List<Book> bookList = new ArrayList<>();
 
-        bookList.addAll(genreRepository.findByName(genre).getBooks());
+        bookList.addAll(genreRepository.findByDescription(genre).getBooks());
 
         return bookList;
 

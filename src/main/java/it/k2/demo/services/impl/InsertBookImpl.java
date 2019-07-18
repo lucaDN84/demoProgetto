@@ -11,10 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Service
 public class InsertBookImpl implements InsertBook {
 
 
@@ -92,7 +94,7 @@ public class InsertBookImpl implements InsertBook {
         }
 
 
-        book.setGenre(genreRepository.findByName(genreDescription));
+        book.setGenre(genreRepository.findByDescription(genreDescription));
         book.setPublisher(publisherRepository.findByName(publisherName));
 
         book.setTitle(bookTitle);

@@ -38,7 +38,7 @@ public class SaveMethodImpl implements SaveMethod {
 
         String titleBook = book.getTitle();
 
-        if(bookRepository.existsByTitle(titleBook)) {
+        if(!bookRepository.existsByTitle(titleBook)) {
 
             bookRepository.save(book);
 
@@ -51,7 +51,7 @@ public class SaveMethodImpl implements SaveMethod {
 
         String authorName = author.getName();
 
-        if(authorRepository.existsByName(authorName)) {
+        if(!authorRepository.existsByName(authorName)) {
             authorRepository.save(author);
         }
     }
@@ -61,7 +61,7 @@ public class SaveMethodImpl implements SaveMethod {
 
         String genreDescription = genre.getDescription();
 
-        if(genreRepository.existsByDescription(genreDescription)) {
+        if(!genreRepository.existsByDescription(genreDescription)) {
             genreRepository.save(genre);
         }
 
@@ -72,7 +72,7 @@ public class SaveMethodImpl implements SaveMethod {
 
         String publisherName = publisher.getName();
 
-        if(publisherRepository.existsByName(publisherName)) {
+        if(!publisherRepository.existsByName(publisherName)) {
             publisherRepository.save(publisher);
 
         }

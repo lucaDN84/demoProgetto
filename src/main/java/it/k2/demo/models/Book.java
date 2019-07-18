@@ -34,9 +34,8 @@ public class Book
     @JoinTable(
         name = " books_authors",
         joinColumns = @JoinColumn(name = "id_book", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "id_author", referencedColumnName = "id")
-    )
-    private Set<Author> Authors;
+        inverseJoinColumns = @JoinColumn(name = "id_author", referencedColumnName = "id"))
+    private Set<Author> authors;
 
     public Book() { }
 
@@ -48,7 +47,7 @@ public class Book
         this.price = price;
         this.genre = genre;
         this.publisher = publisher;
-        Authors = authors;
+        authors = authors;
     }
 
     public void setId(Integer id) {
@@ -74,7 +73,7 @@ public class Book
     public void setPublisher(Publisher publisher) { this.publisher = publisher; }
 
     public void setAuthors(Set<Author> authors) {
-        Authors = authors;
+        authors = authors;
     }
 
     public Integer getId() {
@@ -102,6 +101,6 @@ public class Book
     }
 
     public Set<Author> getAuthors() {
-        return Authors;
+        return authors;
     }
 }
