@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface InsertBook {
 
-    void insertNewBook(String bookTitle, String authorName, String publisherName, String genreDescription, Integer quantity, Double price) throws DataIntegrityViolationException;
+     void insertNewBook(String bookTitle, String authorName, String publisherName, String genreDescription, Integer quantity, Double price) throws DataIntegrityViolationException;
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface SaveMethod {
 
+
          void saveBook(Book book) throws DataIntegrityViolationException;
 
          void saveAuthor(Author author) throws DataIntegrityViolationException;

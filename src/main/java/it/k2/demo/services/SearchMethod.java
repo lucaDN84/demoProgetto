@@ -9,6 +9,7 @@ import java.util.List;
 @Service
 public interface SearchMethod {
 
+
     List<Book> getBooksByAuthor(String authorName);
 
     List<Book> getBooksByGenre(String genre);

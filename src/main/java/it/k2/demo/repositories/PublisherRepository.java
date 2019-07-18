@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface PublisherRepository  extends JpaRepository<Publisher, Integer>
 {
+
     Publisher findByName(String name);
    // Publisher findById_Publisher(Integer id_publisher);
     List<Publisher> findAll();
