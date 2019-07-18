@@ -13,17 +13,17 @@ public class Author
     private Integer id;
 
     @NotNull
-    private String title;
+    private String name;
 
     @ManyToMany(mappedBy = "authors")
     private Set<Book> books;
 
     public Author() {  }
 
-    public Author(Integer id, @NotNull String title, Set<Book> books)
+    public Author(Integer id, @NotNull String name, Set<Book> books)
     {
         this.id = id;
-        this.title = title;
+        this.name = name;
         this.books = books;
     }
 
@@ -31,8 +31,8 @@ public class Author
         this.id = id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setBooks(Set<Book> books) {
@@ -43,8 +43,8 @@ public class Author
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
     public Set<Book> getBooks() {

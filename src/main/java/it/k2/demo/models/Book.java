@@ -20,7 +20,7 @@ public class Book
     private Integer quantity;
 
     @NotNull
-    private double prince;
+    private double price;
 
     @ManyToOne
     @JoinColumn(name = "id_genre", nullable = false)
@@ -40,12 +40,12 @@ public class Book
 
     public Book() { }
 
-    public Book(Integer id, @NotNull String title, @NotNull Integer quantity, @NotNull double prince, Genre genre, Genre publisher, Set<Author> authors)
+    public Book(Integer id, @NotNull String title, @NotNull Integer quantity, @NotNull double price, Genre genre, Genre publisher, Set<Author> authors)
     {
         this.id = id;
         this.title = title;
         this.quantity = quantity;
-        this.prince = prince;
+        this.price = price;
         this.genre = genre;
         this.publisher = publisher;
         Authors = authors;
@@ -63,8 +63,8 @@ public class Book
         this.quantity = quantity;
     }
 
-    public void setPrince(double prince) {
-        this.prince = prince;
+    public void setPrice(double prince) {
+        this.price = prince;
     }
 
     public void setGenre(Genre genre) {
@@ -91,8 +91,8 @@ public class Book
         return quantity;
     }
 
-    public double getPrince() {
-        return prince;
+    public double getPrice() {
+        return price;
     }
 
     public Genre getGenre() {
