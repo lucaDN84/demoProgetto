@@ -28,7 +28,7 @@ public class Book
 
     @ManyToOne
     @JoinColumn(name = "id_publisher", nullable = false)
-    private Genre publisher;
+    private Publisher publisher;
 
     @ManyToMany
     @JoinTable(
@@ -40,7 +40,7 @@ public class Book
 
     public Book() { }
 
-    public Book(Integer id, @NotNull String title, @NotNull Integer quantity, @NotNull double price, Genre genre, Genre publisher, Set<Author> authors)
+    public Book(Integer id, @NotNull String title, @NotNull Integer quantity, @NotNull double price, Genre genre, Publisher publisher, Set<Author> authors)
     {
         this.id = id;
         this.title = title;
@@ -71,9 +71,7 @@ public class Book
         this.genre = genre;
     }
 
-    public void setPublisher(Genre publisher) {
-        this.publisher = publisher;
-    }
+    public void setPublisher(Publisher publisher) { this.publisher = publisher; }
 
     public void setAuthors(Set<Author> authors) {
         Authors = authors;
@@ -99,7 +97,7 @@ public class Book
         return genre;
     }
 
-    public Genre getPublisher() {
+    public Publisher getPublisher() {
         return publisher;
     }
 
