@@ -46,7 +46,7 @@ public class Book
         this.price = price;
         this.genre = genre;
         this.publisher = publisher;
-        authors = authors;
+        this.authors = authors;
     }
 
     public void setId(Integer id) {
@@ -72,7 +72,7 @@ public class Book
     public void setPublisher(Publisher publisher) { this.publisher = publisher; }
 
     public void setAuthors(Set<Author> authors) {
-        authors = authors;
+        this.authors = authors;
     }
 
     public Integer getId() {

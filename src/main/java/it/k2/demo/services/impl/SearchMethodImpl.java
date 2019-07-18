@@ -10,11 +10,13 @@ import it.k2.demo.services.SearchMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Service
+@Transactional
 public class SearchMethodImpl implements SearchMethod {
 
     @Autowired

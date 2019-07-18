@@ -16,7 +16,8 @@ public class Author
     @NotNull
     private String name;
 
-    @ManyToMany(mappedBy = "authors")
+
+    @ManyToMany(mappedBy = "authors", fetch = FetchType.EAGER)
     private Set<Book> books;
 
     public Author() {  }
