@@ -49,9 +49,25 @@ public class DemoApplication implements ApplicationListener<ApplicationReadyEven
 			log.info("Errore salvataggio Libro");
 	    }
 
+        try
+        {
+            insert.insertNewBook(        "L'Idiota","Fedor Dostoevskij","Mondadori","Romanzo",1,9.50);
+            log.info("Libro inserito");
+        }
+        catch (DataIntegrityViolationException e)
+        {
+            log.info("Errore salvataggio Libro");
+        }
 
-
-
+        try
+        {
+            insert.insertNewBook(        "Il Giocatore","Fedor Dostoevskij","Mondadori","Romanzo",1,9.50);
+            log.info("Libro inserito");
+        }
+        catch (DataIntegrityViolationException e)
+        {
+            log.info("Errore salvataggio Libro");
+        }
 	    List<Author> listaAutori = new ArrayList<>();
 
         Book book = searchMethod.getBookInDatabase("Delitto e Castigo");
