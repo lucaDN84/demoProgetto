@@ -1,13 +1,14 @@
 package it.k2.demo.controller;
 
-import it.k2.demo.repositories.AuthorRepository;
+import it.k2.demo.models.Book;
 import it.k2.demo.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class BookController {
@@ -22,16 +23,23 @@ public class BookController {
         return "Ciao";
     }
 
-    @RequestMapping("/books",method = RequestMethod.GET)
+    @RequestMapping("/")
     @ResponseBody
-    public String listaLibri() {
-
-          for (int i = 0; i < bookRepository.findAll().size(); i++) {
+    public ModelAndView listaLibri() {
 
 
 
-             return bookRepository.findAll().get(i).getTitle();
-          }
+        List<Book> list = bookRepository.findAll();
+        List<String> listaTitoli = new ArrayList<>();
+        for(Book book : list) {
+            listaTitoli.add(book.getTitle());
+        }
+
+        //return back to index.jsp
+        ModelAndView model = new ModelAndView();
+        model.addObject("lists", listaTitoli);
+
+        return model;
 
 
     }
