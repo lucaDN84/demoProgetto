@@ -43,7 +43,11 @@ public class DemoApplication implements ApplicationListener<ApplicationReadyEven
 
 
 	    Book book = new Book();
-        Genre genre = new Genre();
+        Book book2 = new Book();
+        Book book3 = new Book();
+
+
+	    Genre genre = new Genre();
         Publisher publisher = new Publisher();
         Author author = new Author();
 
@@ -64,6 +68,20 @@ public class DemoApplication implements ApplicationListener<ApplicationReadyEven
 	    book.setQuantity(1);
 	    book.setPrice(10.00);
 
+        book2.setAuthors(authorList);
+        book2.setGenre(genre);
+        book2.setPublisher(publisher);
+        book2.setTitle("L'Idiota");
+        book2.setQuantity(1);
+        book2.setPrice(9.90);
+
+        book3.setAuthors(authorList);
+        book3.setGenre(genre);
+        book3.setPublisher(publisher);
+        book3.setTitle("Il Giocatore");
+        book3.setQuantity(1);
+        book3.setPrice(6.00);
+
 
 
 	    try
@@ -76,15 +94,47 @@ public class DemoApplication implements ApplicationListener<ApplicationReadyEven
             log.info("Errore salvataggio Libro");
         }
 
+
+        try
+        {
+            logic.insertNewBook(book2);
+            log.info("Libro inserito");
+        }
+        catch (DataIntegrityViolationException e)
+        {
+            log.info("Errore salvataggio Libro");
+        }
+
+        try
+        {
+            logic.insertNewBook(book3);
+            log.info("Libro inserito");
+        }
+        catch (DataIntegrityViolationException e)
+        {
+            log.info("Errore salvataggio Libro");
+        }
+
+	    for(String lista : logic.getAuthorsInDatabaseToString()) {
+	            log.info(lista);
+        }
+
+
 	    List<Author> listaAutori = new ArrayList<>();
 
-        Book book2 = logic.getBookInDatabase("Delitto e Castigo");
+        //logic.getBookInDatabase("Delitto e Castigo");
 
-        log.info(book2.getTitle());
+       // log.info(book2.getTitle());
 
-        listaAutori.addAll(logic.getAuthorsByBook("Delitto e Castigo"));
+        //listaAutori.addAll(logic.getAuthorsByBook("Delitto e Castigo"));
 
-        for(Author author2 :listaAutori) {
+        //for(Author author2 :listaAutori) {
+          //  log.info(author2.getName());
+        //}
+
+        listaAutori = logic.getAuthorsByBook("Il Giocatore");
+
+        for(Author author2 : listaAutori) {
             log.info(author2.getName());
         }
 
