@@ -17,6 +17,30 @@ public class BookController {
     BookRepository bookRepository;
 
 
+    @Controller
+    public class DemoController
+    {
+        @RequestMapping(value="/home")
+
+
+        public String getIndex()
+        {
+            return "index";
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     @RequestMapping("/welcome")
     @ResponseBody
     public String hello() {

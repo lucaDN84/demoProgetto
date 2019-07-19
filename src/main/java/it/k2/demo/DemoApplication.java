@@ -2,10 +2,9 @@ package it.k2.demo;
 
 import it.k2.demo.models.Author;
 import it.k2.demo.models.Book;
-import it.k2.demo.repositories.BookRepository;
-import it.k2.demo.services.InsertBook;
-import it.k2.demo.services.SaveMethod;
-import it.k2.demo.services.SearchMethod;
+import it.k2.demo.models.Genre;
+import it.k2.demo.models.Publisher;
+import it.k2.demo.services.Logic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 //import org.springframework.dao.DataIntegrityViolationException;
 
 @SpringBootApplication
@@ -29,6 +30,9 @@ public class DemoApplication implements ApplicationListener<ApplicationReadyEven
     @Autowired
     SearchMethod searchMethod;
 
+    @Autowired
+    Logic logic;
+
     Logger log = LoggerFactory.getLogger(DemoApplication.class);
 
 	public static void main(String[] args) {
@@ -39,19 +43,34 @@ public class DemoApplication implements ApplicationListener<ApplicationReadyEven
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
 
+
+	    Book book = new Book();
+        Genre genre = new Genre();
+        Publisher publisher = new Publisher();
+        Author author = new Author();
+
+	    author.setName("Fedor Dostoevskij");
+
+        Set<Author> authorList = new HashSet<>();
+
+        authorList.add(author);
+
+        genre.setDescription("Romanzo");
+        publisher.setName("Mondadori");
+
+
+        book.setAuthors(authorList);
+        book.setGenre(genre);
+        book.setPublisher(publisher);
+        book.setTitle("Delitto e Castigo");
+	    book.setQuantity(1);
+	    book.setPrice(10.00);
+
+
+
 	    try
-	    {
-			insert.insertNewBook(        "Delitto e Castigo","Fedor Dostoevskij","Mondadori","Romanzo",1,9.50);
-			log.info("Libro inserito");
-		}
-			catch (DataIntegrityViolationException e)
-		{
-			log.info("Errore salvataggio Libro");
-	    }
-
-        try
         {
-            insert.insertNewBook(        "L'Idiota","Fedor Dostoevskij","Mondadori","Romanzo",1,9.50);
+            logic.insertNewBook(book);
             log.info("Libro inserito");
         }
         catch (DataIntegrityViolationException e)
@@ -59,25 +78,16 @@ public class DemoApplication implements ApplicationListener<ApplicationReadyEven
             log.info("Errore salvataggio Libro");
         }
 
-        try
-        {
-            insert.insertNewBook(        "Il Giocatore","Fedor Dostoevskij","Mondadori","Romanzo",1,9.50);
-            log.info("Libro inserito");
-        }
-        catch (DataIntegrityViolationException e)
-        {
-            log.info("Errore salvataggio Libro");
-        }
 	    List<Author> listaAutori = new ArrayList<>();
 
-        Book book = searchMethod.getBookInDatabase("Delitto e Castigo");
+        Book book2 = searchMethod.getBookInDatabase("Delitto e Castigo");
 
-        log.info(book.getTitle());
+        log.info(book2.getTitle());
 
         listaAutori.addAll(searchMethod.getAuthorsByBook("Delitto e Castigo"));
 
-        for(Author author :listaAutori) {
-            log.info(author.getName());
+        for(Author author2 :listaAutori) {
+            log.info(author2.getName());
         }
 
 
