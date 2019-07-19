@@ -40,36 +40,35 @@ public class LogicImpl implements Logic {
     @Override
     public void insertNewBook(Book book) throws DataIntegrityViolationException {
 
-        Logger log = LoggerFactory.getLogger(InsertBookImpl.class);
-
+        Logger log = LoggerFactory.getLogger(LogicImpl.class);
 
         Author author = new Author();
-
         Publisher publisher = new Publisher();
-
         Genre genre = new Genre();
 
         Set<Author> authorList = new HashSet<>();
 
-
         genre = book.getGenre();
         publisher = book.getPublisher();
 
-
-        try {
+        try
+        {
             saveGenre(genre);
-        } catch (DataIntegrityViolationException e) {
-            log.info("Errore salvataggio GENERE");
-
         }
+            catch (DataIntegrityViolationException e)
+            {
+                log.info("Errore salvataggio GENERE");
+            }
 
 
-        try {
+        try
+        {
             savePublisher(publisher);
-        } catch (DataIntegrityViolationException e1) {
-            log.info("Errore salvataggio EDITORE");
-
         }
+            catch (DataIntegrityViolationException e1)
+            {
+                log.info("Errore salvataggio EDITORE");
+            }
 
 
         book.setGenre(genreRepository.findByDescription(book.getGenre().getDescription()));
@@ -78,36 +77,45 @@ public class LogicImpl implements Logic {
 
         //prendo la lista degli autori dal libro:
 
-
         authorList.addAll(book.getAuthors());
 
-        for (Author authorBook : authorList) {
-
-            try {
+        for (Author authorBook : authorList)
+        {
+            try
+            {
                 saveAuthor(authorBook);
-            } catch (DataIntegrityViolationException e3) {
-                log.info("Errore salvataggio Autore");
-
             }
-
-
+                catch (DataIntegrityViolationException e3)
+                {
+                    log.info("Errore salvataggio Autore");
+                }
         }
 
-        for (Author author3 : book.getAuthors()) {
-            for (Iterator<Author> iterator = authorRepository.findAll().iterator(); iterator.hasNext(); author = iterator.next()) {
-                if (author3.getName().equals(author.getName())) {
+
+        for (Author author3 : book.getAuthors())
+        {
+            for (Iterator<Author> iterator = authorRepository.findAll().iterator(); iterator.hasNext(); author = iterator.next())
+            {
+                if (author3.getName().equals(author.getName()))
+                {
                     authorList.add(author);
                 }
                 book.setAuthors(authorList);
             }
-            try {
+            try
+            {
                 saveBook(book);
-            } catch (DataIntegrityViolationException e2) {
-                log.info("Errore salvataggio LIBRO");
             }
+                catch (DataIntegrityViolationException e2)
+                {
+                    log.info("Errore salvataggio LIBRO");
+                }
 
         }
     }
+
+//====================================================================================================//
+
     @Override
     public List<Book> getBooksByAuthor(String authorName) {
         List<Book> bookList = new ArrayList<>();
@@ -116,6 +124,8 @@ public class LogicImpl implements Logic {
 
         return bookList;
     }
+
+//====================================================================================================//
 
     @Override
     public List<Book> getBooksByGenre(String genre) {
@@ -126,6 +136,8 @@ public class LogicImpl implements Logic {
         return bookList;
     }
 
+//====================================================================================================//
+
     @Override
     public List<Book> getBooksByPublisher(String publisher) {
         List<Book> bookList = new ArrayList<>();
@@ -135,6 +147,8 @@ public class LogicImpl implements Logic {
         return bookList;
     }
 
+//====================================================================================================//
+
     @Override
     public Book getBookInDatabase(String titleBook) {
         Book book  = new Book();
@@ -143,6 +157,8 @@ public class LogicImpl implements Logic {
 
         return book;
     }
+
+//====================================================================================================//
 
     @Override
     public void saveBook(Book book) throws DataIntegrityViolationException {
@@ -155,6 +171,8 @@ public class LogicImpl implements Logic {
         }
     }
 
+ //====================================================================================================//
+
     @Override
     public void saveAuthor(Author author) throws DataIntegrityViolationException {
 
@@ -163,9 +181,10 @@ public class LogicImpl implements Logic {
         if(!authorRepository.existsByName(authorName)) {
             authorRepository.save(author);
         }
-
-
     }
+
+ //====================================================================================================//
+
 
     @Override
     public void saveGenre(Genre genre) throws DataIntegrityViolationException {
@@ -176,6 +195,9 @@ public class LogicImpl implements Logic {
             genreRepository.save(genre);
         }
     }
+
+
+//====================================================================================================//
 
     @Override
     public void savePublisher(Publisher publisher) throws DataIntegrityViolationException {
