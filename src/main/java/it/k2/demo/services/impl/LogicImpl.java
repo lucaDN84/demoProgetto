@@ -138,12 +138,13 @@ public class LogicImpl implements Logic {
     }
 
     @Override
-    public Book getBookInDatabase(String titleBook) {
-        Book book  = new Book();
+    public List<Book> getBookInDatabase() {
 
-        book = bookRepository.findByTitle(titleBook);
+        List<Book> listaLibri = new ArrayList<>();
 
-        return book;
+        listaLibri = bookRepository.findAll();
+
+        return listaLibri;
     }
 
     @Override

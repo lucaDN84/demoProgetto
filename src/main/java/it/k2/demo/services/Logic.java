@@ -20,7 +20,7 @@ public interface Logic {
     List<Book> getBooksByPublisher(String publisher);
 
     List<Author> getAuthorsByBook(String titleBook);
-    public Book getBookInDatabase(String titleBook);
+    List<Book> getBookInDatabase();
 
 
     void saveBook(Book book) throws DataIntegrityViolationException;
