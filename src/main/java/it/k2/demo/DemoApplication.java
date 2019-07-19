@@ -25,12 +25,6 @@ public class DemoApplication implements ApplicationListener<ApplicationReadyEven
 {
 
     @Autowired
-    InsertBook insert;
-
-    @Autowired
-    SearchMethod searchMethod;
-
-    @Autowired
     Logic logic;
 
     Logger log = LoggerFactory.getLogger(DemoApplication.class);
@@ -80,11 +74,11 @@ public class DemoApplication implements ApplicationListener<ApplicationReadyEven
 
 	    List<Author> listaAutori = new ArrayList<>();
 
-        Book book2 = searchMethod.getBookInDatabase("Delitto e Castigo");
+        Book book2 = logic.getBookInDatabase("Delitto e Castigo");
 
         log.info(book2.getTitle());
 
-        listaAutori.addAll(searchMethod.getAuthorsByBook("Delitto e Castigo"));
+        listaAutori.addAll(logic.getAuthorsByBook("Delitto e Castigo"));
 
         for(Author author2 :listaAutori) {
             log.info(author2.getName());

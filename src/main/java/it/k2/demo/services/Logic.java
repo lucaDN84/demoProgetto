@@ -19,6 +19,7 @@ public interface Logic {
 
     List<Book> getBooksByPublisher(String publisher);
 
+    List<Author> getAuthorsByBook(String titleBook);
     public Book getBookInDatabase(String titleBook);
 
 

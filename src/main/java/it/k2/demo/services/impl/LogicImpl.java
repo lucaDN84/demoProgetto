@@ -40,7 +40,7 @@ public class LogicImpl implements Logic {
     @Override
     public void insertNewBook(Book book) throws DataIntegrityViolationException {
 
-        Logger log = LoggerFactory.getLogger(InsertBookImpl.class);
+        Logger log = LoggerFactory.getLogger(LogicImpl.class);
 
 
         Author author = new Author();
@@ -188,5 +188,20 @@ public class LogicImpl implements Logic {
         }
 
     }
+
+    @Override
+    public List<Author> getAuthorsByBook(String titleBook) {
+
+        List<Author> authorList = new ArrayList<>();
+
+        authorList.addAll(bookRepository.findByTitle(titleBook).getAuthors());
+
+        return authorList;
+
+
+    }
+
+
+
 }
 
