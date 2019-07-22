@@ -35,10 +35,7 @@ public class DemoApplication implements ApplicationListener<ApplicationReadyEven
     {
 
 
-
-
-
-	    Book book = new Book();
+        Book book1 = new Book();
         Book book2 = new Book();
         Book book3 = new Book();
 
@@ -57,12 +54,12 @@ public class DemoApplication implements ApplicationListener<ApplicationReadyEven
         publisher.setName("Mondadori");
 
 
-        book.setAuthors(authorList);
-        book.setGenre(genre);
-        book.setPublisher(publisher);
-        book.setTitle("Delitto e Castigo");
-	    book.setQuantity(1);
-	    book.setPrice(10.00);
+        book1.setAuthors(authorList);
+        book1.setGenre(genre);
+        book1.setPublisher(publisher);
+        book1.setTitle("Delitto e Castigo");
+	    book1.setQuantity(1);
+	    book1.setPrice(10.00);
 
         book2.setAuthors(authorList);
         book2.setGenre(genre);
@@ -81,7 +78,7 @@ public class DemoApplication implements ApplicationListener<ApplicationReadyEven
 
         //inserimento dei libri:
 
-        logic.insertNewBook(book);
+        logic.insertNewBook(book1);
 
 
         logic.insertNewBook(book2);
