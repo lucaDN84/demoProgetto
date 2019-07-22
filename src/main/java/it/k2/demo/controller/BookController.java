@@ -1,73 +1,39 @@
 package it.k2.demo.controller;
 
-import it.k2.demo.models.Book;
-import it.k2.demo.repositories.BookRepository;
+import it.k2.demo.services.Logic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import java.util.ArrayList;
-import java.util.List;
 
-@Controller
-public class BookController {
-
-    @Autowired
-    BookRepository bookRepository;
 
 
     @Controller
-    public class DemoController
+    public class BookController
     {
-        @RequestMapping(value="/home")
+        @Autowired
+        Logic logic ;
 
-
-        public String getIndex()
-        {
-            return "index";
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-    @RequestMapping("/welcome")
-    @ResponseBody
-    public String hello() {
-        return "Ciao";
-    }
-
-    @RequestMapping("/")
-    @ResponseBody
-    public ModelAndView listaLibri() {
-
-
-
-        List<Book> list = bookRepository.findAll();
-        List<String> listaTitoli = new ArrayList<>();
-        for(Book book : list) {
-            listaTitoli.add(book.getTitle());
+        @RequestMapping(value="/books")
+        public String elencoLibri(Model model) {
+            model.addAttribute("books",logic.getBooksInDatabaseToString());
+            return "output";
         }
 
-        //return back to index.jsp
-        ModelAndView model = new ModelAndView();
-        model.addObject("lists", listaTitoli);
 
-        return model;
+        @RequestMapping(value="/authors")
+        public String elencoAutori(Model model) {
+            model.addAttribute("authors",logic.getAuthorsInDatabaseToString());
+            return "output";
+        }
+
+
+
 
 
     }
 
 
-}
+
 
 

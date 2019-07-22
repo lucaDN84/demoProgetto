@@ -5,20 +5,16 @@ import it.k2.demo.models.Book;
 import it.k2.demo.models.Genre;
 import it.k2.demo.models.Publisher;
 import it.k2.demo.services.Logic;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.dao.DataIntegrityViolationException;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-//import org.springframework.dao.DataIntegrityViolationException;
+
 
 @SpringBootApplication
 public class DemoApplication implements ApplicationListener<ApplicationReadyEvent>
@@ -27,7 +23,7 @@ public class DemoApplication implements ApplicationListener<ApplicationReadyEven
     @Autowired
     Logic logic;
 
-    Logger log = LoggerFactory.getLogger(DemoApplication.class);
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -83,60 +79,31 @@ public class DemoApplication implements ApplicationListener<ApplicationReadyEven
         book3.setPrice(6.00);
 
 
+        //inserimento dei libri:
 
-	    try
-        {
-            logic.insertNewBook(book);
-            log.info("Libro inserito");
-        }
-        catch (DataIntegrityViolationException e)
-        {
-            log.info("Errore salvataggio Libro");
-        }
+        logic.insertNewBook(book);
 
 
-        try
-        {
-            logic.insertNewBook(book2);
-            log.info("Libro inserito");
-        }
-        catch (DataIntegrityViolationException e)
-        {
-            log.info("Errore salvataggio Libro");
-        }
-
-        try
-        {
-            logic.insertNewBook(book3);
-            log.info("Libro inserito");
-        }
-        catch (DataIntegrityViolationException e)
-        {
-            log.info("Errore salvataggio Libro");
-        }
-
-	    for(String lista : logic.getAuthorsInDatabaseToString()) {
-	            log.info(lista);
-        }
+        logic.insertNewBook(book2);
 
 
-	    List<Author> listaAutori = new ArrayList<>();
+        logic.insertNewBook(book3);
 
-        //logic.getBookInDatabase("Delitto e Castigo");
 
-       // log.info(book2.getTitle());
+	  //  for(String lista : logic.getAuthorsInDatabaseToString()) {
+	   //         log.info(lista);
+      //  }
 
-        //listaAutori.addAll(logic.getAuthorsByBook("Delitto e Castigo"));
 
-        //for(Author author2 :listaAutori) {
-          //  log.info(author2.getName());
-        //}
+	  // List<Author> listaAutori = new ArrayList<>();
 
-        listaAutori = logic.getAuthorsByBook("Il Giocatore");
 
-        for(Author author2 : listaAutori) {
-            log.info(author2.getName());
-        }
+
+      //  listaAutori = logic.getAuthorsByBook("Il Giocatore");
+
+      //  for(Author author2 : listaAutori) {
+      //      log.info(author2.getName());
+      //  }
 
 
 

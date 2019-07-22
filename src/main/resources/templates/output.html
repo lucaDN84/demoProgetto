@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Elenco Libri</title>
+    <title> </title>
 </head>
 <body>
-<table style="width:100%">
-    <tr>
-        <th>Firstname</th>
-    </tr>
-</table>
+<h1>Elenco libri:  <span th:text="${books}"></span>...</h1>
+<h2>Elenco autori: <span th:text="${authors}"></span>...</h2>
 </body>
 </html>
