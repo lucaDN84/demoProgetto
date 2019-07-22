@@ -1,4 +1,4 @@
-package it.k2.demo.controller;
+package it.k2.demo.controllers;
 
 import it.k2.demo.services.Librarian;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
         @RequestMapping(value="/books")
         public String elencoLibri(Model model) {
-            model.addAttribute("books",librarian.getBookInDatabaseToString());
-            return "output";
+            model.addAttribute("books",librarian.getBooksInDatabaseToString());
+            return "bookList";
         }
 
 
-//        @RequestMapping(value="/authors")
-//        public String elencoAutori(Model model) {
-//            model.addAttribute("authors",librarian.());
-//            return "output";
-//        }
-//
+
 
 
 
