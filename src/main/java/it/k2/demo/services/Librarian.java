@@ -75,7 +75,6 @@ public class Librarian {
 
         }
 
-
         book.setGenre(genreRepository.findByDescription(book.getGenre().getDescription()));
         book.setPublisher(publisherRepository.findByName(book.getPublisher().getName()));
 
