@@ -12,7 +12,6 @@ public interface AuthorRepository extends JpaRepository<Author, Integer>
 
     Author findByName(String name);
     //Author findById_Author(Integer id);
-   // Author findById_Book(Integer id_book);
     List<Author> findAll();
 
     boolean existsById(Integer id);
