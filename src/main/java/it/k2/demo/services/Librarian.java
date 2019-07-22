@@ -1,4 +1,4 @@
-package it.k2.demo.services.impl;
+package it.k2.demo.services;
 import java.util.Iterator;
 import it.k2.demo.models.Author;
 import it.k2.demo.models.Book;
@@ -8,7 +8,6 @@ import it.k2.demo.repositories.AuthorRepository;
 import it.k2.demo.repositories.BookRepository;
 import it.k2.demo.repositories.GenreRepository;
 import it.k2.demo.repositories.PublisherRepository;
-import it.k2.demo.services.Logic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ import java.util.Set;
 
 @Service
 @Transactional
-public class LogicImpl implements Logic {
+public class Librarian {
 
     @Autowired
     AuthorRepository authorRepository;
@@ -39,10 +38,10 @@ public class LogicImpl implements Logic {
 
 
 
-    @Override
-    public void insertNewBook(Book book) throws DataIntegrityViolationException {
 
-        Logger log = LoggerFactory.getLogger(LogicImpl.class);
+    public void insertNewBook(Book book) {
+
+        Logger log = LoggerFactory.getLogger(Librarian.class);
 
 
         Author author = new Author();
@@ -110,7 +109,7 @@ public class LogicImpl implements Logic {
 
         }
     }
-    @Override
+
     public List<Book> getBooksByAuthor(String authorName) {
         List<Book> bookList = new ArrayList<>();
 
@@ -119,7 +118,7 @@ public class LogicImpl implements Logic {
         return bookList;
     }
 
-    @Override
+
     public List<Book> getBooksByGenre(String genre) {
         List<Book> bookList = new ArrayList<>();
 
@@ -128,7 +127,7 @@ public class LogicImpl implements Logic {
         return bookList;
     }
 
-    @Override
+
     public List<Book> getBooksByPublisher(String publisher) {
         List<Book> bookList = new ArrayList<>();
 
@@ -137,7 +136,7 @@ public class LogicImpl implements Logic {
         return bookList;
     }
 
-    @Override
+
     public List<Book> getBookInDatabase() {
 
         List<Book> listaLibri = new ArrayList<>();
@@ -147,7 +146,7 @@ public class LogicImpl implements Logic {
         return listaLibri;
     }
 
-    @Override
+
     public void saveBook(Book book) throws DataIntegrityViolationException {
         String titleBook = book.getTitle();
 
@@ -158,7 +157,7 @@ public class LogicImpl implements Logic {
         }
     }
 
-    @Override
+
     public void saveAuthor(Author author) throws DataIntegrityViolationException {
 
         String authorName = author.getName();
@@ -170,7 +169,7 @@ public class LogicImpl implements Logic {
 
     }
 
-    @Override
+
     public void saveGenre(Genre genre) throws DataIntegrityViolationException {
 
         String genreDescription = genre.getDescription();
@@ -180,7 +179,7 @@ public class LogicImpl implements Logic {
         }
     }
 
-    @Override
+
     public void savePublisher(Publisher publisher) throws DataIntegrityViolationException {
 
         String publisherName = publisher.getName();
@@ -192,7 +191,7 @@ public class LogicImpl implements Logic {
 
     }
 
-    @Override
+
     public List<String> getBookInDatabaseToString()
     {
 
@@ -210,7 +209,7 @@ public class LogicImpl implements Logic {
         return newBooksList;
     }
 
-    @Override
+
     public List<Author> getAuthorsByBook(String titleBook) {
 
         List<Author> authorList = new ArrayList<>();

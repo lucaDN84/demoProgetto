@@ -4,7 +4,7 @@ import it.k2.demo.models.Author;
 import it.k2.demo.models.Book;
 import it.k2.demo.models.Genre;
 import it.k2.demo.models.Publisher;
-import it.k2.demo.services.Logic;
+import it.k2.demo.services.Librarian;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +14,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 //import org.springframework.dao.DataIntegrityViolationException;
 
@@ -25,7 +23,7 @@ public class DemoApplication implements ApplicationListener<ApplicationReadyEven
 {
 
     @Autowired
-    Logic logic;
+    Librarian librarian;
 
     Logger log = LoggerFactory.getLogger(DemoApplication.class);
 
@@ -81,9 +79,9 @@ public class DemoApplication implements ApplicationListener<ApplicationReadyEven
 
         try
         {
-            logic.insertNewBook(book);
-            logic.insertNewBook(book2);
-            logic.insertNewBook(book3);
+            librarian.insertNewBook(book);
+            librarian.insertNewBook(book2);
+            librarian.insertNewBook(book3);
             log.info("Libro inserito");
         }
         catch (DataIntegrityViolationException e)
