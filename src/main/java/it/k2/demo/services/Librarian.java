@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -34,9 +33,13 @@ public class Librarian {
     PublisherRepository publisherRepository;
 
     @Autowired
-    BookRepository bookRepository;
+    SaveManager saveManager;
 
+    @Autowired
+    BookManager bookManager;
 
+    @Autowired
+    AuthorManager authorManager;
 
 
     public void insertNewBook(Book book) {
@@ -58,7 +61,7 @@ public class Librarian {
 
 
         try {
-            saveGenre(genre);
+            saveManager.saveGenre(genre);
         } catch (DataIntegrityViolationException e) {
             log.info("Errore salvataggio GENERE");
 
@@ -66,7 +69,7 @@ public class Librarian {
 
 
         try {
-            savePublisher(publisher);
+            saveManager.savePublisher(publisher);
         } catch (DataIntegrityViolationException e1) {
             log.info("Errore salvataggio EDITORE");
 
@@ -85,7 +88,7 @@ public class Librarian {
         for (Author authorBook : authorList) {
 
             try {
-                saveAuthor(authorBook);
+                saveManager.saveAuthor(authorBook);
             } catch (DataIntegrityViolationException e3) {
                 log.info("Errore salvataggio Autore");
 
@@ -102,7 +105,7 @@ public class Librarian {
                 book.setAuthors(authorList);
             }
             try {
-                saveBook(book);
+                saveManager.saveBook(book);
             } catch (DataIntegrityViolationException e2) {
                 log.info("Errore salvataggio LIBRO");
             }
@@ -110,96 +113,14 @@ public class Librarian {
         }
     }
 
-    public List<Book> getBooksByAuthor(String authorName) {
-        List<Book> bookList = new ArrayList<>();
+    /*  ***********************************************************************************/
 
-        bookList.addAll(authorRepository.findByName(authorName).getBooks());
+    public List<String> getBookInDatabaseToString() {
 
-        return bookList;
-    }
-
-
-    public List<Book> getBooksByGenre(String genre) {
-        List<Book> bookList = new ArrayList<>();
-
-        bookList.addAll(genreRepository.findByDescription(genre).getBooks());
-
-        return bookList;
-    }
-
-
-    public List<Book> getBooksByPublisher(String publisher) {
-        List<Book> bookList = new ArrayList<>();
-
-        bookList.addAll(publisherRepository.findByName(publisher).getBooks());
-
-        return bookList;
-    }
-
-
-    public List<Book> getBookInDatabase() {
-
-        List<Book> listaLibri = new ArrayList<>();
-
-        listaLibri = bookRepository.findAll();
-
-        return listaLibri;
-    }
-
-
-    public void saveBook(Book book) throws DataIntegrityViolationException {
-        String titleBook = book.getTitle();
-
-        if(!bookRepository.existsByTitle(titleBook)) {
-
-            bookRepository.save(book);
-
-        }
-    }
-
-
-    public void saveAuthor(Author author) throws DataIntegrityViolationException {
-
-        String authorName = author.getName();
-
-        if(!authorRepository.existsByName(authorName)) {
-            authorRepository.save(author);
-        }
-
-
-    }
-
-
-    public void saveGenre(Genre genre) throws DataIntegrityViolationException {
-
-        String genreDescription = genre.getDescription();
-
-        if(!genreRepository.existsByDescription(genreDescription)) {
-            genreRepository.save(genre);
-        }
-    }
-
-
-    public void savePublisher(Publisher publisher) throws DataIntegrityViolationException {
-
-        String publisherName = publisher.getName();
-
-        if(!publisherRepository.existsByName(publisherName)) {
-            publisherRepository.save(publisher);
-
-        }
-
-    }
-
-
-    public List<String> getBookInDatabaseToString()
-    {
-
-        List<Book> books = getBookInDatabase();
+        List<Book> books = bookManager.getBookInDatabase();
         List<String> newBooksList = new ArrayList<>();
 
-        for(int i = 0; i < books.size(); i++)
-        {
+        for (int i = 0; i < books.size(); i++) {
             Book book = books.get(i);
 
             newBooksList.add(book.getTitle() + " " + books.get(i).getGenre().getDescription() + " " + books.get(i).getPublisher().getName() + "\n");
@@ -209,19 +130,44 @@ public class Librarian {
         return newBooksList;
     }
 
+    /* ***********************************************************************************************/
+    public List<String> getAuthorInDatabaseToString() {
 
-    public List<Author> getAuthorsByBook(String titleBook) {
+        List<Author> authors = authorManager.getAuthorInDataBase();
+        List<String> newAuthorList = new ArrayList<>();
 
-        List<Author> authorList = new ArrayList<>();
+        for (int i = 0; i < authors.size(); i++) {
+            Author author = authors.get(i);
 
-        authorList.addAll(bookRepository.findByTitle(titleBook).getAuthors());
+            newAuthorList.add(author.getName() + " " + "\n");
 
-        return authorList;
+        }
 
+        return newAuthorList;
+    }
+
+    /* ****************************************************************************/
+
+    public List<String> getAuthorsAndBooksToString() {
+
+        List<Author> authors = authorManager.getAuthorInDataBase();
+
+        List<String> authorsAndBooks = new ArrayList<>();
+
+        List<Book> books = new ArrayList<>();
+
+
+        for (Author author : authors) {
+            author.getName();
+            books = authorManager.getBooksByAuthor(author.getName());
+
+            for(int i = 0; i < books.size(); i++) {
+                authorsAndBooks.add("Autore  :" + author.getName() + " " + "Titolo :" +  books.get(i).getTitle()  );
+            }
+        }
+
+        return authorsAndBooks;
 
     }
 
-
-
 }
-
