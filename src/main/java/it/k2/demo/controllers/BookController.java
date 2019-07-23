@@ -1,6 +1,6 @@
-package it.k2.demo.controller;
+package it.k2.demo.controllers;
 
-import it.k2.demo.services.Librarian;
+import it.k2.demo.services.LibrarianService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
     public class BookController
     {
         @Autowired
-        Librarian librarian ;
+        LibrarianService librarian ;
 
         @RequestMapping(value="/books")
         public String elencoLibri(Model model) {
-            model.addAttribute("books",librarian.getBookInDatabaseToString());
+            model.addAttribute("books",librarian.getAuthorsAndBooksToString());
             return "bookList";
         }
 

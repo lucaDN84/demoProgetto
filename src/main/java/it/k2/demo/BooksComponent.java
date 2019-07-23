@@ -4,7 +4,7 @@ import it.k2.demo.models.Author;
 import it.k2.demo.models.Book;
 import it.k2.demo.models.Genre;
 import it.k2.demo.models.Publisher;
-import it.k2.demo.services.Librarian;
+import it.k2.demo.services.LibrarianService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class BooksComponent {
     Logger log = LoggerFactory.getLogger(BooksComponent.class);
 
     @Autowired
-    Librarian librarian;
+    LibrarianService librarian;
 
     @Bean
     public void saveNewBook()

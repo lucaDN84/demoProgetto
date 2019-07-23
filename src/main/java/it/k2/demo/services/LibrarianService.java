@@ -160,7 +160,7 @@ public class LibrarianService {
             books = authorManager.getBooksByAuthor(author.getName());
 
             for(int i = 0; i < books.size(); i++) {
-                authorsAndBooks.add("Autore  :" + author.getName() + " " + "Titolo :" +  books.get(i).getTitle()  );
+                authorsAndBooks.add("Autore: " + author.getName() + " " + "Titolo: " +  books.get(i).getTitle() + " " + "Genere: " +  books.get(i).getGenre().getDescription() + " " + "Editore: " + " " + books.get(i).getPublisher().getName());
             }
         }
 
