@@ -1,4 +1,4 @@
-package it.k2.demo.controllers;
+package it.k2.demo.controller;
 
 import it.k2.demo.services.Librarian;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
         @RequestMapping(value="/books")
         public String elencoLibri(Model model) {
-            model.addAttribute("books",librarian.getBooksInDatabaseToString());
+            model.addAttribute("books",librarian.getBookInDatabaseToString());
             return "bookList";
         }
-
-
-
-
-
-
 
     }
 
