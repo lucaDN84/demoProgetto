@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class SaveManager {
+public class SaveService {
 
     @Autowired
     PublisherRepository publisherRepository;

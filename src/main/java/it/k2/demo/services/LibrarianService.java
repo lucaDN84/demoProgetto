@@ -5,7 +5,6 @@ import it.k2.demo.models.Book;
 import it.k2.demo.models.Genre;
 import it.k2.demo.models.Publisher;
 import it.k2.demo.repositories.AuthorRepository;
-import it.k2.demo.repositories.BookRepository;
 import it.k2.demo.repositories.GenreRepository;
 import it.k2.demo.repositories.PublisherRepository;
 import org.slf4j.Logger;
@@ -21,7 +20,7 @@ import java.util.Set;
 
 @Service
 @Transactional
-public class Librarian {
+public class LibrarianService {
 
     @Autowired
     AuthorRepository authorRepository;
@@ -33,18 +32,18 @@ public class Librarian {
     PublisherRepository publisherRepository;
 
     @Autowired
-    SaveManager saveManager;
+    SaveService saveManager;
 
     @Autowired
-    BookManager bookManager;
+    BookService bookManager;
 
     @Autowired
-    AuthorManager authorManager;
+    AuthorService authorManager;
 
 
     public void insertNewBook(Book book) {
 
-        Logger log = LoggerFactory.getLogger(Librarian.class);
+        Logger log = LoggerFactory.getLogger(LibrarianService.class);
 
 
         Author author = new Author();
