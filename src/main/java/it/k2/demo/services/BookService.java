@@ -16,7 +16,7 @@ import java.util.*;
 
 @Service
 @Transactional
-public class BookManager {
+public class BookService {
 
     @Autowired
     BookRepository bookRepository;
