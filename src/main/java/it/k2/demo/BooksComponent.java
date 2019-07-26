@@ -8,9 +8,11 @@ import it.k2.demo.services.LibrarianService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 // import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.HashSet;
 import java.util.List;
@@ -80,5 +82,12 @@ public class BooksComponent {
         {
             log.info(string);
         }
+
+    }
+
+    @Bean
+    public RestTemplate rest()
+    {
+        return new RestTemplateBuilder().build();
     }
 }

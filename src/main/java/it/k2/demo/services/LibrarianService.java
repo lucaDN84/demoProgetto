@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -40,6 +42,10 @@ public class LibrarianService {
     @Autowired
     AuthorService authorManager;
 
+    @Autowired
+    private RestTemplate rest;
+
+    private static final String URL = "http://localhost:8091/bookss/getAllBooks";
 
     public void insertNewBook(Book book) {
 
@@ -165,7 +171,11 @@ public class LibrarianService {
         }
 
         return authorsAndBooks;
+    }
 
+
+    public String getBook() {
+        return rest.getForEntity(URL, String.class).getBody().toString();
     }
 
 }
