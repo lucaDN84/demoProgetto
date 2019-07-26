@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
         @Autowired
         LibrarianService librarian ;
 
-//        @RequestMapping(value="/books")
         @GetMapping
         public String elencoLibri(Model model) {
             model.addAttribute("books",librarian.getBook());

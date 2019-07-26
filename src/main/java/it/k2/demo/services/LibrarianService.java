@@ -1,9 +1,7 @@
 package it.k2.demo.services;
 import java.util.Iterator;
-import it.k2.demo.models.Author;
-import it.k2.demo.models.Book;
-import it.k2.demo.models.Genre;
-import it.k2.demo.models.Publisher;
+
+import it.k2.demo.models.*;
 import it.k2.demo.repositories.AuthorRepository;
 import it.k2.demo.repositories.GenreRepository;
 import it.k2.demo.repositories.PublisherRepository;
@@ -174,8 +172,13 @@ public class LibrarianService {
     }
 
 
-    public String getBook() {
-        return rest.getForEntity(URL, String.class).getBody().toString();
+    public BookJson getBook()
+    {
+
+        BookJson bookJson = rest.getForObject(URL, BookJson.class);
+
+        return bookJson;
+
     }
 
 }

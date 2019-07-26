@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-// @Configuration
 public class BooksComponent {
 
     Logger log = LoggerFactory.getLogger(BooksComponent.class);
