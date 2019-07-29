@@ -32,7 +32,6 @@ public class BookController {
             });
             if (booksResponse != null && booksResponse.hasBody()) {
                 books = booksResponse.getBody();
-
             }
 
         } catch (Exception e) {
