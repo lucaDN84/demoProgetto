@@ -8,7 +8,7 @@ public class AuthorDto {
     private Set<BookDto> booksDto;
 
     public AuthorDto(){ }
-    public AuthorDto(String name, Set<Book> books) {this.name = name;this.booksDto = booksDto;}
+    public AuthorDto(String name, Set<BookDto> books) {this.name = name;this.booksDto = booksDto;}
 
     public String getName() {return name;}
     public Set<BookDto> getBooksDto() {return booksDto;}
