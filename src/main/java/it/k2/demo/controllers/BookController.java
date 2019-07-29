@@ -1,6 +1,9 @@
 package it.k2.demo.controllers;
 
 import it.k2.demo.models.BookDto;
+import it.k2.demo.service.Connection;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +19,8 @@ import java.util.List;
 @Controller
 public class BookController {
 
-
-    private static final String URL = "http://localhost:8091/books/getAllBooks";
+    @Autowired
+    Connection connection;
 
     @GetMapping
     public String elencoLibri(Model model) {
@@ -25,7 +28,7 @@ public class BookController {
         List<BookDto> books = new ArrayList<>();
         try {
 
-            ResponseEntity<List<BookDto>> booksResponse = rest.exchange(URL, HttpMethod.GET, null, new ParameterizedTypeReference<List<BookDto>>() {
+            ResponseEntity<List<BookDto>> booksResponse = rest.exchange(connection.getUrl(), HttpMethod.GET, null, new ParameterizedTypeReference<List<BookDto>>() {
             });
             if (booksResponse != null && booksResponse.hasBody()) {
                 books = booksResponse.getBody();

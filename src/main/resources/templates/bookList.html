@@ -4,9 +4,16 @@
     <title>Elenco Libri </title>
 </head>
 <body>
-<h1>Elenco libri: ...</h1>
-<table>
-
+<h1>Elenco libri:</h1>
+<table style="width:100%">
+    <tr>
+        <th>Title</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Genre</th>
+        <th>Publisher</th>
+        <th>Author</th>
+    </tr>
     <tr th:each="book : ${books}">
         <td th:text="${book.title}"></td>
         <td th:text="${book.quantity}"></td>
