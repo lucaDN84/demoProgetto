@@ -4,6 +4,23 @@
     <title>Elenco Libri </title>
 </head>
 <body>
-<h1>Elenco libri:  <span th:text="${books}"></span>...</h1>
+<h1>Elenco libri: ...</h1>
+<table>
+
+    <tr th:each="book : ${books}">
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.quantity}"></td>
+        <td th:text="${book.price}"></td>
+        <td th:each="genre : ${book.genreDto}">
+            <span th:text="${genre.description}"></span>
+        <td th:each="publisher : ${book.publisherDto}">
+            <span th:text="${publisher.name}"></span>
+        <td th:each="author : ${book.authorsDto}">
+            <span th:text="${author.name}"></span>
+        </td>
+    </tr>
+
+</table>
+
 </body>
 </html>

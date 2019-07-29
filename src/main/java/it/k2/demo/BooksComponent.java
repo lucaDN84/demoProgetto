@@ -84,9 +84,5 @@ public class BooksComponent {
 
     }
 
-    @Bean
-    public RestTemplate rest()
-    {
-        return new RestTemplateBuilder().build();
-    }
+
 }

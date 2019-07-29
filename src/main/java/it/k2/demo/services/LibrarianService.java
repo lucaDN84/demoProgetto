@@ -40,10 +40,7 @@ public class LibrarianService {
     @Autowired
     AuthorService authorManager;
 
-    @Autowired
-    private RestTemplate rest;
 
-    private static final String URL = "http://localhost:8091/bookss/getAllBooks";
 
     public void insertNewBook(Book book) {
 
@@ -172,13 +169,6 @@ public class LibrarianService {
     }
 
 
-    public BookJson getBook()
-    {
 
-        BookJson bookJson = rest.getForObject(URL, BookJson.class);
-
-        return bookJson;
-
-    }
 
 }
